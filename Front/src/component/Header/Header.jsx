@@ -1,9 +1,5 @@
-import React from "react";
-import {
-  UserCircleIcon,
-  MagnifyingGlassIcon,
-  FaceSmileIcon,
-} from "@heroicons/react/24/outline";
+import React, { useState } from "react";
+import { UserCircleIcon, FaceSmileIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
@@ -19,7 +15,11 @@ const Header = ({ needSearch, searchState }) => {
         </Link>
       </div>
       {needSearch && <SearchBar searchState={searchState} />}
-      <div className="lg:border-l-2 lg:pl-10 h-10 my-auto ml-auto flex felx-row">
+      <div
+        className={`lg:border-l-2 lg:pl-10 h-10 my-auto flex felx-row ${
+          needSearch ? "ml-3 lg:ml-auto" : "ml-auto"
+        }`}
+      >
         <button className="flex flex-row ml-auto">
           <UserCircleIcon className="w-8 h-8 mr-2 my-auto stroke-gray-400" />
           <p className="text-gray-400 my-auto hidden lg:block">Admin</p>

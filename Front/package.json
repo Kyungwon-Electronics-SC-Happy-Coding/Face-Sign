@@ -18,6 +18,7 @@
     "react-router": "^6.8.1",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss": "^3.2.4",
     "web-vitals": "^2.1.4"
   },
@@ -45,7 +46,7 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@3.3.1",
+  "packageManager": "yarn@3.4.1",
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "eslint": "latest",

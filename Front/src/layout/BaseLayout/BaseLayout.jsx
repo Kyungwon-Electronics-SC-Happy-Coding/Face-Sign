@@ -13,7 +13,7 @@ const BaseLayout = ({ children, searchState }) => {
           needSearch={searchState ? true : false}
           searchState={searchState ? searchState : baseSearchState}
         />
-        <div className="w-full h-full flex flex-col overflow-y-scroll">
+        <div className="w-full h-full flex flex-col overflow-y-scroll scrollbar-hide">
           {children}
         </div>
       </div>
