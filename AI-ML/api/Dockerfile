@@ -1,7 +1,5 @@
 FROM python:3.7-slim-buster
 
-MAINTAINER Luka Dulčić "culuma@arsfutura.co"
-
 RUN mkdir -p /app && \
     apt-get update -y && \
     apt-get install -y build-essential python3-dev libsm6 libxext6 libxrender-dev libglib2.0-0
