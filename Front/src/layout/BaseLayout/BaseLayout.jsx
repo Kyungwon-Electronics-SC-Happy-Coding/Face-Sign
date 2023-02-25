@@ -9,8 +9,13 @@ const BaseLayout = ({ children, searchState }) => {
     <div className="flex flex-row h-[100vh] w-[100vw]">
       <SideBar />
       <div className="w-full flex flex-col bg-backwhite">
-        <Header searchState={searchState ? searchState : baseSearchState} />
-        <div className="w-full h-full flex flex-col">{children}</div>
+        <Header
+          needSearch={searchState ? true : false}
+          searchState={searchState ? searchState : baseSearchState}
+        />
+        <div className="w-full h-full flex flex-col overflow-y-scroll">
+          {children}
+        </div>
       </div>
     </div>
   );

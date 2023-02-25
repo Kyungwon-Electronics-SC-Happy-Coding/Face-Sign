@@ -2,28 +2,27 @@ import React from "react";
 import {
   UserCircleIcon,
   MagnifyingGlassIcon,
+  FaceSmileIcon,
 } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
-const Header = ({ searchState }) => {
-  const [search, setSearch] = searchState;
-
+const Header = ({ needSearch, searchState }) => {
   return (
-    <div className="h-[4.5rem] w-full bg-white shadow-md py-4 px-10 flex flex-row">
-      <div className="w-96 h-full flex flex-row">
-        <input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="bg-backwhite w-full px-3 outline-none rounded-l-md"
-          placeholder="Search for.."
-        />
-        <button className="bg-backMint h-full w-12 p-3 rounded-r-md">
-          <MagnifyingGlassIcon className="stroke-textOrange w-full h-full stroke-[4px]" />
-        </button>
+    <div className="h-[4.735rem] w-full bg-white shadow-md px-3 lg:px-10 flex flex-row">
+      <div className="h-16 my-auto flex flex-row lg:hidden">
+        <FaceSmileIcon className="w-12 h-full stroke-borderMint my-auto" />
+        <Link to="/">
+          <p className="h-full flex items-center ml-3 text-xl text-borderMint font-semibold">
+            Face Sign
+          </p>
+        </Link>
       </div>
-      <div className="border-l-2 w-32 h-full ml-auto flex felx-row">
+      {needSearch && <SearchBar searchState={searchState} />}
+      <div className="lg:border-l-2 lg:pl-10 h-10 my-auto ml-auto flex felx-row">
         <button className="flex flex-row ml-auto">
           <UserCircleIcon className="w-8 h-8 mr-2 my-auto stroke-gray-400" />
-          <p className="text-gray-400 my-auto">Admin</p>
+          <p className="text-gray-400 my-auto hidden lg:block">Admin</p>
         </button>
       </div>
     </div>

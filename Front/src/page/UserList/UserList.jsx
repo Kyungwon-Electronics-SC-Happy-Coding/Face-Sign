@@ -1,8 +1,12 @@
-const { default: BaseLayout } = require("layout/BaseLayout");
+import BaseLayout from "layout/BaseLayout";
+import { useState } from "react";
 
 const UserList = () => {
+  const searchNameState = useState("");
+  const [searchName, setSearchName] = searchNameState;
+
   return (
-    <BaseLayout>
+    <BaseLayout searchState={searchNameState}>
       <div>User List</div>
     </BaseLayout>
   );

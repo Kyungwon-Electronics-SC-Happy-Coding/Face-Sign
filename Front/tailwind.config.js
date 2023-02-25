@@ -7,7 +7,7 @@ module.exports = {
         backMint: "#43D8CF",
         borderMint: "#26CAC0",
         backwhite: "#F8F9FC",
-        textOrange: "#FFFFFF",
+        textWhite: "#FFFFFF",
       },
     },
   },

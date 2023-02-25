@@ -1,4 +1,4 @@
-const { default: BaseLayout } = require("layout/BaseLayout");
+import BaseLayout from "layout/BaseLayout";
 
 const AddUser = () => {
   return (
