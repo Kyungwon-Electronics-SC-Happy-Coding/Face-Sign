@@ -1,6 +1,7 @@
 import axios from "axios";
+import UserAPI from "./UserAPI";
 
-export const API_URL = process.env.REACT_APP_API_URL;
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 export const ajax = async (options) => {
   let result;
@@ -14,4 +15,18 @@ export const ajax = async (options) => {
   return result;
 };
 
-export const API = {};
+const login = ({ id, pw }) => {
+  try {
+    const options = {
+      method: "POST",
+      url: `/login`,
+      data: { id, pw },
+    };
+    return ajax(options);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
+export const API = { login, ...UserAPI };
