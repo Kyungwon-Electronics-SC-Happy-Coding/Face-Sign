@@ -1,8 +1,7 @@
-import BaseLayout from "layout/BaseLayout";
-import { useState } from "react";
+import NeedLoginLayout from "layout/NeedLoginLayout";
+import { useEffect, useState } from "react";
 
 const AddUser = () => {
-  const [openInput, setOpenInput] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userName, setUserName] = useState("");
   const [userPhone, setUserPhone] = useState("");
@@ -16,8 +15,12 @@ const AddUser = () => {
     setLoading(false);
   };
 
+  useEffect(() => {
+    setInputMsg("");
+  }, []);
+
   return (
-    <BaseLayout>
+    <NeedLoginLayout>
       <div className="p-10">
         <div className="mx-auto w-full flex flex-col overflow-hidden bg-backwhite transition-all border-2 p-5">
           <p className="text-2xl text-gray-400 font-semibold">이름</p>
@@ -81,7 +84,7 @@ const AddUser = () => {
           </button>
         </div>
       </div>
-    </BaseLayout>
+    </NeedLoginLayout>
   );
 };
 

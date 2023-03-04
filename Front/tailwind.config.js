@@ -8,6 +8,11 @@ module.exports = {
         borderMint: "#26CAC0",
         backwhite: "#F8F9FC",
         textWhite: "#FFFFFF",
+        textRed: "#FF7676",
+      },
+      spacing: {
+        header: "66px",
+        sidebar: "250px",
       },
     },
   },

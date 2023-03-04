@@ -6,14 +6,14 @@ const BaseLayout = ({ children, searchState }) => {
   const baseSearchState = useState("");
 
   return (
-    <div className="flex flex-row h-[100vh] w-[100vw]">
+    <div className="flex flex-row h-screen w-screen">
       <SideBar />
-      <div className="w-full flex flex-col bg-backwhite">
+      <div className="flex flex-col bg-backwhite">
         <Header
           needSearch={searchState ? true : false}
           searchState={searchState ? searchState : baseSearchState}
         />
-        <div className="w-full h-full flex flex-col overflow-y-scroll scrollbar-hide">
+        <div className="w-screen lg:w-[calc(100vw-theme(space.sidebar))] h-[calc(100vh-theme(space.header))] flex flex-col overflow-y-scroll scrollbar-hide">
           {children}
         </div>
       </div>
