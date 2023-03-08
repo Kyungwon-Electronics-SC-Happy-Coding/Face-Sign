@@ -50,6 +50,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-router", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:6.8.1"],\
             ["react-router-dom", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:6.8.2"],\
             ["react-scripts", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:5.0.1"],\
+            ["react-webcam", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:7.0.1"],\
             ["redux", "npm:4.2.1"],\
             ["redux-persist", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:6.0.0"],\
             ["redux-thunk", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:2.4.2"],\
@@ -8835,6 +8836,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-router", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:6.8.1"],\
             ["react-router-dom", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:6.8.2"],\
             ["react-scripts", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:5.0.1"],\
+            ["react-webcam", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:7.0.1"],\
             ["redux", "npm:4.2.1"],\
             ["redux-persist", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:6.0.0"],\
             ["redux-thunk", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:2.4.2"],\
@@ -15144,6 +15146,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "eslint",\
             "react",\
             "typescript"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-webcam", [\
+        ["npm:7.0.1", {\
+          "packageLocation": "./.yarn/cache/react-webcam-npm-7.0.1-1e8a178132-b1df32c3bf.zip/node_modules/react-webcam/",\
+          "packageDependencies": [\
+            ["react-webcam", "npm:7.0.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:7.0.1", {\
+          "packageLocation": "./.yarn/__virtual__/react-webcam-virtual-1c7414c01d/0/cache/react-webcam-npm-7.0.1-1e8a178132-b1df32c3bf.zip/node_modules/react-webcam/",\
+          "packageDependencies": [\
+            ["react-webcam", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:7.0.1"],\
+            ["@types/react", null],\
+            ["@types/react-dom", null],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:fd21808e9b2ce3f30db7579cfd3dfaadcd05cede923135dcb96376e4e074901bc3e00f65d2e4651349c2cc2dfd4e093971d8534b979d724488341bc745d54870#npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\

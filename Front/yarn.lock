@@ -6143,6 +6143,7 @@ __metadata:
     react-router: ^6.8.1
     react-router-dom: ^6.8.2
     react-scripts: 5.0.1
+    react-webcam: ^7.0.1
     redux: ^4.2.1
     redux-persist: ^6.0.0
     redux-thunk: ^2.4.2
@@ -10919,6 +10920,16 @@ __metadata:
   bin:
     react-scripts: bin/react-scripts.js
   checksum: 92afa2f245c7092ccc97d5609dc7a2130616262e34da7f15072d9442e2d2e1d4909a91022abd1faac1336eb17c5525a10d9bd43e1ae374c7ec941ca20addca68
+  languageName: node
+  linkType: hard
+
+"react-webcam@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "react-webcam@npm:7.0.1"
+  peerDependencies:
+    react: ">=16.2.0"
+    react-dom: ">=16.2.0"
+  checksum: b1df32c3bfe3fafdb291b06266b30aa2ba88df2a51e04121fb09509feb88fb25fe3291733a9fb9674b56b964b6e69fe801f99e4fd20418520cd2e7641c46c647
   languageName: node
   linkType: hard
 

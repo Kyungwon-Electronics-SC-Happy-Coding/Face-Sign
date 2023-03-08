@@ -32,6 +32,36 @@ const getUser = ({ accessToken, userid }) => {
   }
 };
 
-const UserAPI = { getUserList, getUser };
+const addUser = ({
+  accessToken,
+  USER_PHONE,
+  USER_NAME,
+  USER_PHONE_M,
+  USER_PHONE_F,
+  USER_CLASS,
+}) => {
+  try {
+    const options = {
+      method: "POST",
+      url: `/user`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      data: {
+        USER_PHONE,
+        USER_NAME,
+        USER_PHONE_M,
+        USER_PHONE_F,
+        USER_CLASS,
+      },
+    };
+    return ajax(options);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
+const UserAPI = { getUserList, getUser, addUser };
 
 export default UserAPI;
