@@ -84,17 +84,28 @@ def save_images():
     files.append(request.files['file4'])
     files.append(request.files['file5'])
     files.clear()
-    for f in files:
-        f.save('./save_image/' + secure_filename(f.filename))
-    return \
-        {
-            'faces': [
-                {
-                    'result': True,
-                    'message': 'HolyMoly'
-                }
-            ]
-        }
+    try:
+        for f in files:
+            f.save('./save_image/' + secure_filename(f.filename))
+        return \
+            {
+                'faces': [
+                    {
+                        'result': True,
+                        'message': 'HolyMoly'
+                    }
+                ]
+            }
+    except:
+        return \
+            {
+                'faces': [
+                    {
+                        'result': False,
+                        'message': '유감이네요....'
+                    }
+                ]
+            }
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
