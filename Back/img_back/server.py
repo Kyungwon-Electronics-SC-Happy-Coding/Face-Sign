@@ -14,6 +14,7 @@ def save_images():
     files.append(request.files['file5'])
     for f in files:
         f.save('./save_image/' + secure_filename(f.filename))
+    files.clear()
     return 'done!'
 
 if __name__ == "__main__":
