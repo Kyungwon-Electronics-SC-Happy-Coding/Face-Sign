@@ -5,9 +5,9 @@ import { FaceSmileIcon } from "@heroicons/react/24/outline";
 
 const SideBar = () => {
   return (
-    <div className="h-full w-64 flex-col bg-backMint px-3 hidden lg:flex">
-      <div className="w-full h-[4.5rem] border-b-2 border-borderMint py-4 flex flex-row">
-        <FaceSmileIcon className="h-full w-12 stroke-textWhite my-auto" />
+    <div className="h-screen w-sidebar flex-col bg-backMint px-3 hidden lg:flex">
+      <div className="w-full h-header border-b-2 border-borderMint flex flex-row">
+        <FaceSmileIcon className="h-12 w-12 stroke-textWhite my-auto" />
         <Link to="/">
           <p className="h-full flex items-center ml-3 text-xl text-textWhite font-semibold">
             Face Sign
