@@ -76,6 +76,36 @@ class FaceRecognition(Resource):
                 ]
             }
 
+@api.route('/save-faceimg', methods=['POST'])
+def save_images():
+    files.append(request.files['file1'])
+    files.append(request.files['file2'])
+    files.append(request.files['file3'])
+    files.append(request.files['file4'])
+    files.append(request.files['file5'])
+    files.clear()
+    try:
+        for f in files:
+            f.save('./save_image/' + secure_filename(f.filename))
+        return \
+            {
+                'faces': [
+                    {
+                        'result': True,
+                        'message': 'HolyMoly'
+                    }
+                ]
+            }
+    except:
+        return \
+            {
+                'faces': [
+                    {
+                        'result': False,
+                        'message': '유감이네요....'
+                    }
+                ]
+            }
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
