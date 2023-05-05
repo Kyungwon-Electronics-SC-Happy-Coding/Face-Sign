@@ -94,6 +94,8 @@ def main():
     model_path = os.path.join('model', 'face_recogniser.pkl')
     joblib.dump(FaceRecogniser(features_extractor, clf, idx_to_class), model_path)
 
+    return "Training Successful"
+
 
 if __name__ == '__main__':
     main()

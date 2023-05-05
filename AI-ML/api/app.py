@@ -9,7 +9,7 @@ from face_recognition import preprocessing
 from werkzeug import secure_filename
 
 
-face_recogniser = joblib.load('model/face_recogniser.pkl')
+
 preprocess = preprocessing.ExifOrientationNormalize()
 
 IMAGE_KEY = 'image'
@@ -24,7 +24,17 @@ parser.add_argument(INCLUDE_PREDICTIONS_KEY, type=inputs.boolean, default=False,
                     help='Whether to include all predictions in response.')
 
 imgparser = api.parser()
-imgparser.add_argument(IMAGE_KEY, type=FileStorage, location='files', required=True,
+imgparser.add_argument(f'name', type=str,  required=True,
+                    help='user name please.')
+imgparser.add_argument(f'0', type=FileStorage, location='files', required=True,
+                    help='Image on which face recognition will be run.')
+imgparser.add_argument(f'1', type=FileStorage, location='files', required=True,
+                    help='Image on which face recognition will be run.')
+imgparser.add_argument(f'2', type=FileStorage, location='files', required=True,
+                    help='Image on which face recognition will be run.')
+imgparser.add_argument(f'3', type=FileStorage, location='files', required=True,
+                    help='Image on which face recognition will be run.')
+imgparser.add_argument(f'4', type=FileStorage, location='files', required=True,
                     help='Image on which face recognition will be run.')
 
 bounding_box = api.model('BoundingBox', {
@@ -53,8 +63,8 @@ error_model = api.model('ErrorResponse', {
     'message': fields.String
 })
 
-def save_image(image):
-    image_dir = './images'
+def save_image(image, filename):
+    image_dir = './images/' + filename
     if not os.path.exists(image_dir):
         os.makedirs(image_dir)
     filename = secure_filename(image.filename)
@@ -70,6 +80,7 @@ class FaceRecognition(Resource):
     @api.response(200, 'Success')
     @api.response(400, 'No image file in request.', error_model)
     def post(self):
+        face_recogniser = joblib.load('model/face_recogniser.pkl')
         args = parser.parse_args()
         if IMAGE_KEY not in args:
             abort(400, "Image field '{}' doesn't exist in request!".format(IMAGE_KEY))
@@ -99,17 +110,16 @@ class SaveFaceImg(Resource):
     @api.response(400, 'No image file in request.', error_model)
     def post(self):
        args = imgparser.parse_args()
-       if IMAGE_KEY not in args:
-           abort(400, "Image field '{}' doesn't exist in request!".format(IMAGE_KEY))
 
-       img = Image.open(io.BytesIO(args[IMAGE_KEY].read()))
-       img = preprocess(img)
+       # img = Image.open(io.BytesIO(args[IMAGE_KEY].read()))
+       # img = preprocess(img)
        # convert image to RGB (stripping alpha channel if exists)
-       img = img.convert('RGB')
-       img.save('test.png', 'PNG')
-       image_path = save_image(args[IMAGE_KEY])
-
-       return image_path
+       # img = img.convert('RGB')
+       img_path = []
+       for i in range(5):
+        image_path = save_image(args[str(i)], args['name'])
+        img_path.append(image_path)
+       return img_path
 '''
 @api.route('/save-faceimg', methods=['POST'])
 def save_images():
@@ -145,7 +155,7 @@ def save_images():
 @api.route('/training-start', methods=['GET'])
 def training():
     # os.system('python -m training.train -d ./data/train_img')
-    os.system('python -m training.train -d ./save_image')
+    os.system('python -m training.train -d ./images')
 
     return \
             {
@@ -156,6 +166,17 @@ def training():
                 ]
             }
 '''
+
+# import subprocess
+
+@api.route('/run-python-file')
+class RunPythonFile(Resource):
+    @api.response(200, 'Success')
+    @api.response(400, 'No file specified.', error_model)
+    def get(self):
+        os.system('python -m training.train -d ./images')
+
+        return 'do it'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
