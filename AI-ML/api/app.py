@@ -6,6 +6,7 @@ from flask import Flask
 from flask_restplus import Api, Resource, fields, abort, inputs
 from werkzeug.datastructures import FileStorage
 from face_recognition import preprocessing
+from werkzeug.utils import secure_filename
 
 
 face_recogniser = joblib.load('model/face_recogniser.pkl')
@@ -21,6 +22,10 @@ parser.add_argument(IMAGE_KEY, type=FileStorage, location='files', required=True
                     help='Image on which face recognition will be run.')
 parser.add_argument(INCLUDE_PREDICTIONS_KEY, type=inputs.boolean, default=False,
                     help='Whether to include all predictions in response.')
+
+imgparser = api.parser()
+imgparser.add_argument(IMAGE_KEY, type=FileStorage, location='files', required=True,
+                    help='Image on which face recognition will be run.')
 
 bounding_box = api.model('BoundingBox', {
     'left': fields.Float,
@@ -78,37 +83,27 @@ class FaceRecognition(Resource):
                 ]
             }
 
-@api.route('/save-faceimg', methods=['POST'])
-def save_images():
-    files.append(request.files['file1'])
-    files.append(request.files['file2'])
-    files.append(request.files['file3'])
-    files.append(request.files['file4'])
-    files.append(request.files['file5'])
-    files.clear()
-    try:
-        for f in files:
-            f.save('./save_image/' + secure_filename(f.filename))
-        return \
-            {
-                'faces': [
-                    {
-                        'result': True,
-                        'message': 'HolyMoly'
-                    }
-                ]
-            }
-    except:
-        return \
-            {
-                'faces': [
-                    {
-                        'result': False,
-                        'message': '유감이네요....'
-                    }
-                ]
-            }
-            
+@api.route('/save-faceimg')
+class SaveFaceImg(Resource):
+    @api.expect(imgparser)
+    @api.response(200, 'Success')
+    @api.response(400, 'No image file in request.', error_model)
+    def post(self):
+       args = imgparser.parse_args()
+       if IMAGE_KEY not in args:
+           abort(400, "Image field '{}' doesn't exist in request!".format(IMAGE_KEY))
+
+       img = Image.open(io.BytesIO(args[IMAGE_KEY].read()))
+       img = preprocess(img)
+       # convert image to RGB (stripping alpha channel if exists)
+       img = img.convert('RGB')
+       img.save('test.png', 'PNG')
+       image_path = save_image(args[IMAGE_KEY])
+
+       return image_path
+
+
+'''
 @api.route('/training-start', methods=['GET'])
 def training():
     # os.system('python -m training.train -d ./data/train_img')
@@ -122,6 +117,7 @@ def training():
                     }
                 ]
             }
+'''
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
