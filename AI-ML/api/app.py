@@ -1,10 +1,12 @@
 import io
+import os
 import joblib
 from PIL import Image
 from flask import Flask
 from flask_restplus import Api, Resource, fields, abort, inputs
 from werkzeug.datastructures import FileStorage
 from face_recognition import preprocessing
+
 
 face_recogniser = joblib.load('model/face_recogniser.pkl')
 preprocess = preprocessing.ExifOrientationNormalize()
@@ -103,6 +105,20 @@ def save_images():
                     {
                         'result': False,
                         'message': '유감이네요....'
+                    }
+                ]
+            }
+            
+@api.route('/training-start', methods=['GET'])
+def training():
+    # os.system('python -m training.train -d ./data/train_img')
+    os.system('python -m training.train -d ./save_image')
+    
+    return \
+            {
+                'faces': [
+                    {
+                        'message': 'Training start, waiting please'
                     }
                 ]
             }
