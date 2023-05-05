@@ -14,6 +14,7 @@ RUN pip3 install -r requirements.txt
 COPY face_recognition /app/face_recognition
 COPY model /app/model
 COPY api /app/api
+COPY training /app/training
 COPY tasks/run_prod_server.sh /app/run_prod_server.sh
 RUN chmod +x run_prod_server.sh
 
