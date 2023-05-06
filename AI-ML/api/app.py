@@ -110,62 +110,12 @@ class SaveFaceImg(Resource):
     @api.response(400, 'No image file in request.', error_model)
     def post(self):
        args = imgparser.parse_args()
-
-       # img = Image.open(io.BytesIO(args[IMAGE_KEY].read()))
-       # img = preprocess(img)
-       # convert image to RGB (stripping alpha channel if exists)
-       # img = img.convert('RGB')
        img_path = []
        for i in range(5):
         image_path = save_image(args[str(i)], args['name'])
         img_path.append(image_path)
        return img_path
-'''
-@api.route('/save-faceimg', methods=['POST'])
-def save_images():
-    files.append(request.files['file1'])
-    files.append(request.files['file2'])
-    files.append(request.files['file3'])
-    files.append(request.files['file4'])
-    files.append(request.files['file5'])
-    files.clear()
-    try:
-        for f in files:
-            f.save('./save_image/' + secure_filename(f.filename))
-        return \
-            {
-                'faces': [
-                    {
-                        'result': True,
-                        'message': 'HolyMoly'
-                    }
-                ]
-            }
-    except:
-        return \
-            {
-                'faces': [
-                    {
-                        'result': False,
-                        'message': '유감이네요....'
-                    }
-                ]
-            }
-
-@api.route('/training-start', methods=['GET'])
-def training():
-    # os.system('python -m training.train -d ./data/train_img')
-    os.system('python -m training.train -d ./images')
-
-    return \
-            {
-                'faces': [
-                    {
-                        'message': 'Training start, waiting please'
-                    }
-                ]
-            }
-'''
+    
 
 # import subprocess
 
