@@ -18,12 +18,16 @@ app = Flask(__name__)
 api = Api(app, version='0.1.0', title='Face Recognition API', doc='/docs')
 
 parser = api.parser()
+parser.add_argument(f'kiosk_id', type=int, required=True,
+                    help='write you kiosk_id.')
 parser.add_argument(IMAGE_KEY, type=FileStorage, location='files', required=True,
                     help='Image on which face recognition will be run.')
 parser.add_argument(INCLUDE_PREDICTIONS_KEY, type=inputs.boolean, default=False,
                     help='Whether to include all predictions in response.')
 
 imgparser = api.parser()
+imgparser.add_argument(f'kiosk_id', type=str,  required=True,
+                    help='write you kiosk_id.')
 imgparser.add_argument(f'name', type=str,  required=True,
                     help='user name please.')
 imgparser.add_argument(f'0', type=FileStorage, location='files', required=True,
@@ -63,8 +67,8 @@ error_model = api.model('ErrorResponse', {
     'message': fields.String
 })
 
-def save_image(image, filename):
-    image_dir = './images/' + filename
+def save_image(kiosk_id, image, filename):
+    image_dir = './' + kiosk_id + '/images/' + filename
     if not os.path.exists(image_dir):
         os.makedirs(image_dir)
     filename = secure_filename(image.filename)
@@ -80,10 +84,13 @@ class FaceRecognition(Resource):
     @api.response(200, 'Success')
     @api.response(400, 'No image file in request.', error_model)
     def post(self):
-        face_recogniser = joblib.load('model/face_recogniser.pkl')
+
         args = parser.parse_args()
         if IMAGE_KEY not in args:
             abort(400, "Image field '{}' doesn't exist in request!".format(IMAGE_KEY))
+
+        model_path = './model/' + args['kiosk_id'] + '/face_recogniser.pkl'
+        face_recogniser = joblib.load(model_path)
 
         img = Image.open(io.BytesIO(args[IMAGE_KEY].read()))
         img = preprocess(img)
@@ -112,7 +119,7 @@ class SaveFaceImg(Resource):
        args = imgparser.parse_args()
        img_path = []
        for i in range(5):
-        image_path = save_image(args[str(i)], args['name'])
+        image_path = save_image(args['kiosk_id'], args[str(i)], args['name'])
         img_path.append(image_path)
        return img_path
     
