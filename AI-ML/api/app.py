@@ -41,6 +41,10 @@ imgparser.add_argument(f'3', type=FileStorage, location='files', required=True,
 imgparser.add_argument(f'4', type=FileStorage, location='files', required=True,
                     help='Image on which face recognition will be run.')
 
+trainparser = api.parser()
+trainparser.add_argument(f'kiosk_id', type=str,  required=True,
+                    help='write you kiosk_id.')
+
 bounding_box = api.model('BoundingBox', {
     'left': fields.Float,
     'top': fields.Float,
@@ -128,10 +132,13 @@ class SaveFaceImg(Resource):
 
 @api.route('/run-python-file')
 class RunPythonFile(Resource):
+    @api.expect(trainparser)
     @api.response(200, 'Success')
     @api.response(400, 'No file specified.', error_model)
     def get(self):
-        os.system('python -m training.train -d ./images')
+        training_str = 'python -m training.train -d ./images -m ' + args['kiosk_id']
+#         os.system('python -m training.train -d ./images')
+        os.system(training_str)
 
         return 'do it'
 
