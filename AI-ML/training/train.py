@@ -25,6 +25,7 @@ def parse_args():
                         help='If this option is enabled, grid search will be performed to estimate C parameter of '
                              'Logistic Regression classifier. In order to use this option you have to have at least '
                              '3 examples of every class in your dataset. It is recommended to enable this option.')
+    parser.add_argument('-m', '--model-path', help='model path.')
     return parser.parse_args()
 
 
@@ -91,7 +92,7 @@ def main():
 
     if not os.path.isdir(MODEL_DIR_PATH):
         os.mkdir(MODEL_DIR_PATH)
-    model_path = os.path.join('model', 'face_recogniser.pkl')
+    model_path = os.path.join('model/'+args.model_path, 'face_recogniser.pkl')
     joblib.dump(FaceRecogniser(features_extractor, clf, idx_to_class), model_path)
 
     return "Training Successful"
