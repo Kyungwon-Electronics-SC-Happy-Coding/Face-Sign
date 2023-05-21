@@ -9,9 +9,6 @@ from sklearn.model_selection import GridSearchCV
 from sklearn import metrics
 from face_recognition import preprocessing, FaceFeaturesExtractor, FaceRecogniser
 
-MODEL_DIR_PATH = 'model'
-
-
 def parse_args():
     parser = argparse.ArgumentParser(
         description='Script for training Face Recognition model. You can either give path to dataset or provide path '
@@ -25,7 +22,7 @@ def parse_args():
                         help='If this option is enabled, grid search will be performed to estimate C parameter of '
                              'Logistic Regression classifier. In order to use this option you have to have at least '
                              '3 examples of every class in your dataset. It is recommended to enable this option.')
-    parser.add_argument('-m', '--model-path', help='model path.')
+    parser.add_argument('-k', '--koisk-model-path', help='model path.')
     return parser.parse_args()
 
 
@@ -80,6 +77,8 @@ def train(args, embeddings, labels):
 
 def main():
     args = parse_args()
+    
+    MODEL_DIR_PATH = 'model/' + args.koisk_model_path
 
     features_extractor = FaceFeaturesExtractor()
     embeddings, labels, class_to_idx = load_data(args, features_extractor)
@@ -92,7 +91,7 @@ def main():
 
     if not os.path.isdir(MODEL_DIR_PATH):
         os.mkdir(MODEL_DIR_PATH)
-    model_path = os.path.join('model/'+args.model_path, 'face_recogniser.pkl')
+    model_path = os.path.join('model/'+args.koisk_model_path, 'face_recogniser.pkl')
     joblib.dump(FaceRecogniser(features_extractor, clf, idx_to_class), model_path)
 
     return "Training Successful"
