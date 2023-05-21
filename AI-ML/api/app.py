@@ -93,7 +93,7 @@ class FaceRecognition(Resource):
         if IMAGE_KEY not in args:
             abort(400, "Image field '{}' doesn't exist in request!".format(IMAGE_KEY))
 
-        model_path = './model/' + args['kiosk_id'] + '/face_recogniser.pkl'
+        model_path = './model/' + str(args['kiosk_id']) + '/face_recogniser.pkl'
         face_recogniser = joblib.load(model_path)
 
         img = Image.open(io.BytesIO(args[IMAGE_KEY].read()))
@@ -136,11 +136,12 @@ class RunPythonFile(Resource):
     @api.response(200, 'Success')
     @api.response(400, 'No file specified.', error_model)
     def get(self):
-        training_str = 'python -m training.train -d ./images -m ' + args['kiosk_id']
+        args = trainparser.parse_args()
+        training_str = 'python -m training.train -d ./' + args['kiosk_id']+ '/images -k ' + args['kiosk_id']
 #         os.system('python -m training.train -d ./images')
         os.system(training_str)
 
-        return 'do it'
+        return 'training is finish'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
